@@ -1,37 +1,37 @@
+"use client"; // <<-- ¡SOLUCIÓN! Indica a Next.js que use funcionalidades interactivas (hooks)
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Globe, MessageCircle, Database, Server, Bot, Code } from 'lucide-react';
 
 // ==========================================================
 // ✅ URLs DIRECTAS DE GOOGLE DRIVE INTEGRADA
 // ==========================================================
-// Estas URLs de descarga directa evitan errores de compilación en Vercel.
 const VIDEOS = {
-  // Video en bucle (el que siempre se ve de fondo) - Asumo que es el más corto o 'Idle'
+  // Video en bucle (el que siempre se ve de fondo)
   idle: 'https://drive.google.com/uc?export=download&id=1uxoixvrEwe_f2ZRIwC2jfj-xGqFOsY9T', 
   
-  // Intro en español (el video de bienvenida) - Asumo el segundo.
+  // Intro en español (el video de bienvenida)
   intro_es: 'https://drive.google.com/uc?export=download&id=1qu2nWDMtKKqEzNRQepox9K0fUkTzgzD-', 
   
-  // Intro en inglés (el video de HeyGen) - Asumo el tercero.
+  // Intro en inglés (el video de HeyGen)
   intro_en: 'https://drive.google.com/uc?export=download&id=1iuLTmoTvNFE8zBKQJ_qC7Q9ZGowX1f_j',
   
-  // Video de reacción (el que se activa al pasar el mouse) - Asumo el cuarto.
+  // Video de reacción (el que se activa al pasar el mouse)
   reaction: 'https://drive.google.com/uc?export=download&id=12wTg7bMmoyfn4UPE5rWtO7PlEHZtaqTd'
 };
 // ==========================================================
 
 // El componente principal DEBE ser exportado por defecto
 export default function Portfolio() { 
-  const [currentState, setCurrentState] = useState('idle'); // idle, intro_es, intro_en, reaction
-  const videoRef = useRef(null);
+  const [currentState, setCurrentState] = useState('idle'); 
+  const videoRef = useRef(null); 
 
   // --- LÓGICA DE REPRODUCCIÓN DE VIDEO ---
-  useEffect(() => {
+  useEffect(() => { 
     if (videoRef.current) {
       const video = videoRef.current;
       
       // 1. Asigna la nueva fuente (URL)
-      // Usamos el estado actual para obtener la URL del objeto VIDEOS
       video.src = VIDEOS[currentState];
       
       // 2. Configura atributos dinámicamente
@@ -42,7 +42,7 @@ export default function Portfolio() {
       video.load();
       video.play().catch(error => {
         if (currentState !== 'idle') {
-           // Este console.log es normal si el navegador bloquea el autoplay.
+           // Mensaje de consola si el navegador bloquea el autoplay.
            console.log("Autoplay bloqueado. Haz clic en el video o en un botón para empezar.");
         }
       });
@@ -84,8 +84,6 @@ export default function Portfolio() {
         <video 
           ref={videoRef}
           onEnded={handleVideoEnd}
-          // Si Vercel se queda en negro, puede ser que el video no se cargue.
-          // Prueba a quitar el atributo 'scale-[1.05]' si hay problemas de rendimiento.
           className="w-full h-full object-cover transition-opacity duration-500 opacity-100 transform scale-[1.05]"
         />
         

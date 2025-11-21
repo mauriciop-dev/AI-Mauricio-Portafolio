@@ -43,10 +43,11 @@ export default function Portfolio() {
 
       // 3. Carga y reproduce el nuevo video
       video.load();
+      // Intentamos reproducir, si falla (por autoplay policy), se queda en el fondo gris.
       video.play().catch(error => {
         if (currentState !== 'idle') {
            // Mensaje de consola si el navegador bloquea el autoplay.
-           console.log("Autoplay bloqueado. Haz clic en el video o en un botón para empezar.");
+           console.log("Autoplay bloqueado. Haz clic en el video o en un botón para empezar. Error:", error.message);
         }
       });
     }
@@ -87,6 +88,7 @@ export default function Portfolio() {
         <video 
           ref={videoRef}
           onEnded={handleVideoEnd}
+          playsInline // CRÍTICO: Asegura la reproducción en línea en iOS y otros móviles
           // Añadimos un color de fondo temporal para que no sea solo negro si el video falla al cargar.
           className="w-full h-full object-cover transition-opacity duration-500 opacity-100 transform scale-[1.05] bg-gray-900" 
         />

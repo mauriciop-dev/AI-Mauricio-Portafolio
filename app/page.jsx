@@ -20,8 +20,8 @@ const VIDEOS = {
 };
 // ==========================================================
 
-
-export default function Portfolio() {
+// El componente principal DEBE ser exportado por defecto
+export default function Portfolio() { 
   const [currentState, setCurrentState] = useState('idle'); // idle, intro_es, intro_en, reaction
   const videoRef = useRef(null);
 

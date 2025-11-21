@@ -1,0 +1,20 @@
+{
+  "build": {
+    "env": {
+      
+    }
+  },
+  "crons": [],
+  "routes": [],
+  "git": {
+    
+    "deploymentEnabled": true,
+    "projectId": "auto" 
+  },
+  
+  "framework": "nextjs", 
+  
+  
+  
+  "outputDirectory": ".next" 
+}

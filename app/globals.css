@@ -1,0 +1,14 @@
+/*
+ * Este archivo es esencial. Inicializa las directivas de Tailwind CSS.
+ * Sin esto, las clases como 'bg-black' y 'flex' no funcionan.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Asegura que el layout principal del video ocupe toda la altura */
+html,
+body {
+  height: 100%;
+}

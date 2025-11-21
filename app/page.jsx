@@ -1,23 +1,24 @@
-"use client"; // <<-- ¡SOLUCIÓN! Indica a Next.js que use funcionalidades interactivas (hooks)
+"use client"; // ¡SOLUCIÓN! Indica a Next.js que use funcionalidades interactivas (hooks)
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Globe, MessageCircle, Database, Server, Bot, Code } from 'lucide-react';
 
 // ==========================================================
-// ✅ URLs DIRECTAS DE GOOGLE DRIVE INTEGRADA
+// ✅ RUTAS DE VIDEO: Apuntan a la carpeta 'public/videos/'
+// Asegúrate de que los archivos estén ahí y que los subiste a GitHub.
 // ==========================================================
 const VIDEOS = {
   // Video en bucle (el que siempre se ve de fondo)
-  idle: 'https://drive.google.com/uc?export=download&id=1uxoixvrEwe_f2ZRIwC2jfj-xGqFOsY9T', 
+  idle: '/videos/idle.mp4', 
   
   // Intro en español (el video de bienvenida)
-  intro_es: 'https://drive.google.com/uc?export=download&id=1qu2nWDMtKKqEzNRQepox9K0fUkTzgzD-', 
+  intro_es: '/videos/intro_es.mp4', 
   
   // Intro en inglés (el video de HeyGen)
-  intro_en: 'https://drive.google.com/uc?export=download&id=1iuLTmoTvNFE8zBKQJ_qC7Q9ZGowX1f_j',
+  intro_en: '/videos/intro_en.mp4', 
   
   // Video de reacción (el que se activa al pasar el mouse)
-  reaction: 'https://drive.google.com/uc?export=download&id=12wTg7bMmoyfn4UPE5rWtO7PlEHZtaqTd'
+  reaction: '/videos/reaction.mp4' 
 };
 // ==========================================================
 
@@ -35,8 +36,10 @@ export default function Portfolio() {
       video.src = VIDEOS[currentState];
       
       // 2. Configura atributos dinámicamente
-      video.muted = currentState === 'idle' || currentState === 'reaction'; // Silenciamos Idle y Reacción
-      video.loop = currentState === 'idle'; // Solo el Idle es bucle
+      // Silenciamos Idle y Reacción
+      video.muted = currentState === 'idle' || currentState === 'reaction'; 
+      // Solo el Idle es bucle
+      video.loop = currentState === 'idle'; 
 
       // 3. Carga y reproduce el nuevo video
       video.load();
@@ -84,7 +87,8 @@ export default function Portfolio() {
         <video 
           ref={videoRef}
           onEnded={handleVideoEnd}
-          className="w-full h-full object-cover transition-opacity duration-500 opacity-100 transform scale-[1.05]"
+          // Añadimos un color de fondo temporal para que no sea solo negro si el video falla al cargar.
+          className="w-full h-full object-cover transition-opacity duration-500 opacity-100 transform scale-[1.05] bg-gray-900" 
         />
         
         {/* Overlay Gradiente para que los botones se lean bien */}
@@ -119,7 +123,7 @@ export default function Portfolio() {
         
         <div className="flex flex-wrap justify-center gap-4 md:gap-6">
           
-          {/* Botón 1: Landing Pages */}
+          {/* Botón 1: Web Apps */}
           <ProjectButton 
             icon={<Globe size={24} />} 
             label="Web Apps" 
